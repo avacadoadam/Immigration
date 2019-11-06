@@ -52,7 +52,7 @@ class DoubleLinkedListTest {
         assertEquals(first.getFname(), "added");
         doubleLinkedList.add(2, new Person("third", "sever", LocalDate.of(2017, Month.APRIL, 12), "123", Priority.LOW));
         Person third = doubleLinkedList.get(2);
-        assertEquals(third.getFname(), "third");
+        assertEquals(third.getFname(), "foruth");
     }
 
     /**
@@ -73,7 +73,7 @@ class DoubleLinkedListTest {
     void elementReIndexAfterElementAdded() {
         Person oldFirst = doubleLinkedList.getFirst();
         doubleLinkedList.add(0, new Person("added", "sever", LocalDate.of(2017, Month.APRIL, 12), "123", Priority.LOW));
-        Person secondElement = doubleLinkedList.get(1);
+        Person secondElement = doubleLinkedList.get(2);
         assertEquals(secondElement, oldFirst);
     }
 
