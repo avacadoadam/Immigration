@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.lang.String?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10"
+          xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="Internal.Controllers.AddPersonController">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <AnchorPane prefHeight="372.0" prefWidth="462.0">
+            <children>
+
+                <TextField fx:id="passportNumField" layoutX="14.0" layoutY="129.0" promptText="passportNumber"/>
+                <TextField fx:id="FnameField" layoutX="14.0" layoutY="69.0" prefHeight="39.0" prefWidth="149.0"
+                           promptText="first name"/>
+                <TextField fx:id="LnameField" layoutX="197.0" layoutY="69.0" prefHeight="39.0" prefWidth="158.0"
+                           promptText="second name"/>
+                <DatePicker fx:id="DateOfArrivalField" layoutX="14.0" layoutY="186.0"/>
+                <ChoiceBox layoutX="14.0" layoutY="245.0" prefWidth="150.0" value="Low" fx:id="priorityField">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="High"/>
+                            <String fx:value="Medium"/>
+                            <String fx:value="Low"/>
+                        </FXCollections>
+                    </items>
+
+                </ChoiceBox>
+                <Label layoutX="176.0" layoutY="25.0" text="Add person"/>
+                <Button fx:id="addButton" layoutX="183.0" layoutY="302.0" mnemonicParsing="false" text="Add"/>
+                <Label fx:id="error_msg" layoutX="334.0" layoutY="308.0"/>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>

@@ -5,9 +5,14 @@ import Exceptions.IDNotFoundException;
 
 import java.time.LocalDate;
 
+/**
+ * Handles Priority and other functionality to the doubleLinkedList
+ * This is a singleton however is not thread safe.
+ */
 public class ImmigrationQueue {
 
     private static int nextID = 0;
+    private static ImmigrationQueue single_instance = null;
     private DoubleLinkedList list;
 
     public ImmigrationQueue() {
@@ -128,6 +133,13 @@ public class ImmigrationQueue {
         return next;
     }
 
+    public static ImmigrationQueue getInstance() {
+        if (single_instance == null) {
+            single_instance = new ImmigrationQueue();
+        }
+        return single_instance;
+    }
+
     /**
      * Gets the index of the person in the list with the given ID
      *
@@ -145,6 +157,15 @@ public class ImmigrationQueue {
             index++;
         }
         throw new IDNotFoundException();
+    }
+
+    /**
+     * Gets the next person but does not remove from queue
+     *
+     * @return The next person in the queue
+     */
+    public Person getNext() {
+        return list.getFirst();
     }
 
 
