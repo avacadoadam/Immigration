@@ -25,7 +25,7 @@
                 <TextField fx:id="LnameField" layoutX="197.0" layoutY="69.0" prefHeight="39.0" prefWidth="158.0"
                            promptText="second name"/>
                 <DatePicker fx:id="DateOfArrivalField" layoutX="14.0" layoutY="186.0"/>
-                <ChoiceBox layoutX="14.0" layoutY="245.0" prefWidth="150.0" value="Low" fx:id="priorityField">
+                <ChoiceBox fx:id="priorityField" layoutX="14.0" layoutY="245.0" prefWidth="150.0" value="Low">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="High"/>
@@ -38,6 +38,8 @@
                 <Label layoutX="176.0" layoutY="25.0" text="Add person"/>
                 <Button fx:id="addButton" layoutX="183.0" layoutY="302.0" mnemonicParsing="false" text="Add"/>
                 <Label fx:id="error_msg" layoutX="334.0" layoutY="308.0"/>
+                <Button layoutY="6.0" mnemonicParsing="false" text="back" fx:id="back"/>
+
             </children>
         </AnchorPane>
     </children>

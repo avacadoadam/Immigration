@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="Internal.Controllers.RemovePerson">
+    <children>
+        <Label layoutX="186.0" layoutY="38.0" text="Enter Id of person to remove"/>
+        <TextField fx:id="IDField" layoutX="101.0" layoutY="85.0" promptText="ID"/>
+        <Label fx:id="name" layoutX="379.0" layoutY="169.0" prefHeight="27.0" prefWidth="122.0" text="Name"/>
+        <Label fx:id="passportNum" layoutX="125.0" layoutY="169.0" text="passport number"/>
+        <Label fx:id="dateOfArrival" layoutX="125.0" layoutY="237.0" text="Date of arrival "/>
+        <Label fx:id="priority" layoutX="379.0" layoutY="237.0" text="Priority"/>
+        <Label fx:id="ID" layoutX="172.0" layoutY="299.0" text="ID"/>
+        <Button fx:id="confirm" disable="true" layoutX="222.0" layoutY="339.0" mnemonicParsing="false"
+                text="Confirm Remove" textFill="#bf0707"/>
+        <Label fx:id="error_msg" layoutX="408.0" layoutY="326.0"/>
+        <Button fx:id="search" layoutX="346.0" layoutY="85.0" mnemonicParsing="false" text="Search"/>
+        <Button fx:id="back" mnemonicParsing="false" text="Back"/>
+    </children>
+</AnchorPane>

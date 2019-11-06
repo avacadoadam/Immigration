@@ -10,40 +10,50 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainMenuController {
-
-
-    @FXML
-    public Button addPerson;
-    @FXML
-    public Button removePerson;
-    @FXML
-    public Button next;
-    @FXML
-    public Button getPerson;
+public class RemovePerson {
 
     @FXML
-    public Label dateOfArrival;
+    public TextField IDField;
+    @FXML
+    public Label name;
     @FXML
     public Label passportNum;
     @FXML
-    public Label name;
+    public Label dateOfArrival;
     @FXML
     public Label priority;
     @FXML
     public Label ID;
+    @FXML
+    public Button confirm;
+    @FXML
+    public Label error_msg;
+    @FXML
+    public Button search;
+    @FXML
+    public Button back;
+    private int currentSearchPersonID = -1;
 
+    //TODO not removing or not sending back to menu not sure which one
     @FXML
     public void initialize() {
-        addPerson.setOnAction(this::addPerson);
-        removePerson.setOnAction(this::removePerson);
-        getPerson.setOnAction(this::getPerson);
-        next.setOnAction(e -> next());
-        displayNextPerson();
+        search.setOnAction(e -> displayNextPerson());
+        confirm.setOnAction(e -> {
+            if (currentSearchPersonID != -1) {
+                if (!ImmigrationQueue.getInstance().removePerson(currentSearchPersonID)) {
+                    error_msg.setText("Error deleting that Person from list");
+                } else {
+                    backToMainMenu(e);
+                }
+            }
+        });
+        back.setOnAction(this::backToMainMenu);
+
     }
 
     /**
@@ -51,7 +61,11 @@ public class MainMenuController {
      */
     private void displayNextPerson() {
         Person nextPerson = ImmigrationQueue.getInstance().getNext();
-        if (nextPerson == null) return;
+        if (nextPerson == null) {
+            error_msg.setText("Couldn't find Person");
+            confirm.setDisable(true);
+            return;
+        }
         String priorityText;
         switch (nextPerson.getPriorityLevel().value()) {
             case 1:
@@ -68,49 +82,22 @@ public class MainMenuController {
         priority.setText(priorityText);
         dateOfArrival.setText(nextPerson.getDateOfArrival().toString());
         ID.setText((String.valueOf(nextPerson.getID())));
-
+        confirm.setDisable(false);
     }
 
-    /**
-     * Pops the next person of the list and updates the UI to show the next.
-     */
-    private void next() {
-        ImmigrationQueue.getInstance().next();
-        displayNextPerson();
-    }
-
-    private void getPerson(ActionEvent e) {
-
-    }
-
-    private void removePerson(ActionEvent e) {
+    private void backToMainMenu(ActionEvent e) {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/Internal/res/RemovePersonLayout.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/Internal/res/MainMenuLayout.fxml"));
             Stage newStage = new Stage();
-            newStage.setTitle("Remove Person");
+            newStage.setTitle("Main menu");
             newStage.setScene(new Scene(root, 500, 500));
             newStage.show();
             ((Node) (e.getSource())).getScene().getWindow().hide();
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-
     }
 
-    private void addPerson(ActionEvent e) {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/Internal/res/AddPersonLayout.fxml"));
-            Stage newStage = new Stage();
-            newStage.setTitle("Add person");
-            newStage.setScene(new Scene(root, 500, 500));
-            newStage.show();
-            ((Node) (e.getSource())).getScene().getWindow().hide();
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-
-    }
 
 }

@@ -30,6 +30,9 @@ public class AddPersonController {
     Button addButton;
     @FXML
     Label error_msg;
+    @FXML
+    Button back;
+
 
     @FXML
     public void initialize() {
@@ -37,7 +40,7 @@ public class AddPersonController {
             if (addPerson()) {
                 Parent root;
                 try {
-                    root = FXMLLoader.load(getClass().getResource("res/MainMenu.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("/Internal/res/MainMenuLayout.fxml"));
                     Stage newStage = new Stage();
                     newStage.setTitle("Main menu");
                     newStage.setScene(new Scene(root, 500, 500));
@@ -48,6 +51,19 @@ public class AddPersonController {
                 }
             } else {
                 error_msg.setText("There was a error adding person");
+            }
+        });
+        back.setOnAction(e -> {
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getResource("/Internal/res/MainMenuLayout.fxml"));
+                Stage newStage = new Stage();
+                newStage.setTitle("Main menu");
+                newStage.setScene(new Scene(root, 500, 500));
+                newStage.show();
+                ((Node) (e.getSource())).getScene().getWindow().hide();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
     }
